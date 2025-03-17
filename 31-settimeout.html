@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter with Timer</title>
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f2f5;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+      }
+      #counter {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+      .btn-container button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        background-color: #4caf50;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn-container button:hover {
+        background-color: #45a049;
+      }
+      .btn-container .stop-btn {
+        background-color: #f44336;
+      }
+      .btn-container .stop-btn:hover {
+        background-color: #e53935;
+      }
+      .btn-container .reset-btn {
+        background-color: #2196f3;
+      }
+      .btn-container .reset-btn:hover {
+        background-color: #1e88e5;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter">0</div>
+    <div class="btn-container">
+      <button onclick="startCounter()">Start</button>
+      <button class="stop-btn" onclick="stopCounter()">Stop</button>
+      <button class="reset-btn" onclick="resetCounter()">Reset</button>
+    </div>
+
+    <script>
+      let count = 0;
+      let timer = null;
+
+      function updateCounter() {
+        document.getElementById("counter").textContent = count;
+        count++;
+        timer = setTimeout(updateCounter, 1000); // Call every 1 second
+      }
+
+      function startCounter() {
+        if (!timer) {
+          updateCounter();
+        }
+      }
+
+      function stopCounter() {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      function resetCounter() {
+        stopCounter();
+        count = 0;
+        document.getElementById("counter").textContent = count;
+      }
+    </script>
+  </body>
+</html>
